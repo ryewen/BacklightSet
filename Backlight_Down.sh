@@ -3,21 +3,12 @@
 index="/sys/class/backlight/intel_backlight"
 
 nowIndex=${index}/brightness
-maxIndex=${index}/max_brightness
 
-printf "Current Brightness is "
-cat $nowIndex
+nowBrightness=`cat $nowIndex`
 
-echo "Input New Brightness"
-read newBrightness
+newBrightness=$[nowBrightness - 20]
 
-maxBrightness=`cat $maxIndex`
 minBrightness=1
-
-if [ $newBrightness -gt $maxBrightness ]
-then
-	newBrightness=$maxBrightness
-fi
 
 if [ $newBrightness -lt $minBrightness ]
 then
